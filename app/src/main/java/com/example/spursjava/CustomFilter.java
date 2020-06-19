@@ -1,6 +1,5 @@
 package com.example.spursjava;
 
-import android.util.Log;
 import android.widget.Filter;
 
 import java.util.ArrayList;
@@ -28,7 +27,6 @@ public class CustomFilter extends Filter {
                 }
             }
             filterResults.count = filterModels.size();
-            Log.i(TAG, "filterResults.count: " + filterResults.count);
             filterResults.values = filterModels;
         } else {
             filterResults.count = mFilterList.size();
@@ -39,7 +37,6 @@ public class CustomFilter extends Filter {
 
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
-        Log.i(TAG, "publishResults: ");
         mMyAdapter.mModels = (ArrayList<Model>) results.values;
         mMyAdapter.notifyDataSetChanged();
     }

@@ -3,7 +3,6 @@ package com.example.spursjava;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -68,14 +67,12 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Log.i(TAG, "onQueryTextSubmit: ");
                 mMyAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Log.i(TAG, "onQueryTextChange: ");
                 mMyAdapter.getFilter().filter(newText);
                 return false;
             }
