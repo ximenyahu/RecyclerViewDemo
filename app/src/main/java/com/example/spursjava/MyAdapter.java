@@ -1,5 +1,8 @@
 package com.example.spursjava;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +19,10 @@ import java.util.ArrayList;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.InnerViewHolder> implements Filterable {
     ArrayList<Model> mModels, mFilterList;
     CustomFilter mCustomFilter;
+    private Context mContext;
 
-    public MyAdapter(ArrayList<Model> models) {
+    public MyAdapter(Context context, ArrayList<Model> models) {
+        mContext = context;
         this.mModels = models;
         this.mFilterList = models;
     }
@@ -30,8 +35,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.InnerViewHolder> i
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InnerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull InnerViewHolder holder, final int position) {
         holder.onBind(mModels.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, AnotherActivity.class);
+                intent.putExtra("title", mModels.get(position).getTitle());
+                intent.putExtra("description", mModels.get(position).getDescription());
+                intent.putExtra("image", mModels.get(position).getImage());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -65,6 +80,5 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.InnerViewHolder> i
             mTitle.setText(model.getTitle());
             mDescription.setText(model.getDescription());
         }
-
     }
 }

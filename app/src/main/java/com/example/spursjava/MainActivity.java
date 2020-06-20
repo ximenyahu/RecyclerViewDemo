@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         if (sortBy.equals("descending")) {
             Collections.sort(arrayList, Model.BY_TITLE_DESCENDING);
         }
-        mMyAdapter = new MyAdapter(arrayList);
+        mMyAdapter = new MyAdapter(this, arrayList);
         mRecyclerView.setAdapter(mMyAdapter);
     }
 
