@@ -5,7 +5,33 @@ import java.util.Comparator;
 public class Model {
     private String title;
     private String description;
+    private String profile;
+
+    public Model(String title, String description, String profile, int image) {
+        this.title = title;
+        this.description = description;
+        this.profile = profile;
+        this.image = image;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
     private int image;
+    private boolean isExpand;
+
+    public boolean isExpand() {
+        return isExpand;
+    }
+
+    public void setExpand(boolean expand) {
+        isExpand = expand;
+    }
 
     public Model(String title, String description, int image) {
         this.title = title;

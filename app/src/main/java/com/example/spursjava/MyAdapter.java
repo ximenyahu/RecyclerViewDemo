@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -67,18 +68,33 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.InnerViewHolder> i
         private final ImageView mImageView;
         private final TextView mTitle;
         private final TextView mDescription;
+        private final ImageView mExpand;
+        private final RelativeLayout mExpandLayout;
+        private final TextView mExpandText;
 
         public InnerViewHolder(@NonNull View itemView) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.row_image_view);
             mTitle = itemView.findViewById(R.id.row_title);
             mDescription = itemView.findViewById(R.id.row_description);
+            mExpand = itemView.findViewById(R.id.row_expand);
+            mExpandLayout = itemView.findViewById(R.id.row_expand_layout);
+            mExpandText = itemView.findViewById(R.id.row_expand_text);
         }
 
-        public void onBind(Model model) {
+        public void onBind(final Model model) {
             mImageView.setImageResource(model.getImage());
             mTitle.setText(model.getTitle());
             mDescription.setText(model.getDescription());
+            mExpandLayout.setVisibility(model.isExpand() ? View.VISIBLE : View.GONE);
+            mExpandText.setText(model.getProfile());
+            mExpand.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    model.setExpand(!model.isExpand());
+                    notifyItemChanged(getAdapterPosition());
+                }
+            });
         }
     }
 }
